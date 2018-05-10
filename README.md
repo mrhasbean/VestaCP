@@ -1,7 +1,9 @@
 # VestaCP on Digital Ocean (Ubuntu 16.04 LTE)
 
-A little script to have a web server in Digital Ocean with Vesta Control Panel in no time. 
+A little script to have a web server in Digital Ocean with Vesta Control Panel in no time.
 Good for people with no linux experience and much better for the others.
+
+Original script can be found at https://github.com/FastDigitalOceanDroplets/VestaCP
 
 Script will install: 
 
