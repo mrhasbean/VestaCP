@@ -34,6 +34,7 @@ What is done additionally to a standard VestaCP installation:
 - Setup unattended-upgrades.
 - Remove admin group.
 - Add php-zip and php-gd modules
+- Fix bash profile
 - ...and after installation, run patches to the specific VestaCP version if available.
 
 Minimal requirements
@@ -48,7 +49,7 @@ After login to the droplet for the first time, copy the line bellow and execute 
 
 Once installed REBOOT the droplet. (Very important to do for the nex step !!!)
 
-One rebooted, run the following for some basic setups and patches installation for the specific VestaCP version. Copy the line bellow and execute it in the terminal. (the patch may or may not reboot the system again)
+Once rebooted, run the following for some basic setup and patch installation for the specific VestaCP version. Copy the line bellow and execute it in the terminal. (the patch may or may not reboot the system again)
 
     bash post.sh
 
