@@ -59,7 +59,7 @@ rm -f nginx.tar.gz
 
 # Added v-search command
 
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/FastDigitalOceanDroplets/VestaCP/master/files/v-search-command > /usr/local/vesta/bin/v-search-command
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/v-search-command > /usr/local/vesta/bin/v-search-command
 chmod 770 /usr/local/vesta/bin/v-search-command
 
 # Adds HTTPS certificate from LetsEncrypt to VestaCP control panel at the host name site on the admin user
@@ -73,7 +73,7 @@ v-add-letsencrypt-user admin
 v-add-letsencrypt-domain admin $hostname
 while [ ! -f "/home/admin/conf/web/ssl."$hostname".pem" ]; do sleep 1;echo; done
 while [ ! -f "/home/admin/conf/web/ssl."$hostname".key" ]; do sleep 1;echo; done
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/FastDigitalOceanDroplets/VestaCP/master/files/vesta_ssl > /etc/cron.daily/vesta_ssl
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/vesta_ssl > /etc/cron.daily/vesta_ssl
 sed -i 's/0DOMAIN0/'$hostname'/gi' /etc/cron.daily/vesta_ssl
 chmod +x /etc/cron.daily/vesta_ssl
 /etc/cron.daily/vesta_ssl
