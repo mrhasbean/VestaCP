@@ -2,6 +2,9 @@
 echo
 echo
 echo "################################################################"
+echo "#            https://github.com/mrhasbean/VestaCP              #"
+echo "#                                                              #"
+echo "#                         Forked from:                         #"
 echo "#     https://github.com/FastDigitalOceanDroplets/VestaCP      #"
 echo "#                                                              #"
 echo "# We will go though the proccess of setting up a full web      #"
@@ -19,7 +22,7 @@ if [ "x$(id -u)" != 'x0' ]; then
     exit 1
 fi
 
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/FastDigitalOceanDroplets/VestaCP/master/files/post.sh > post.sh
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/post.sh > post.sh
 
 # Creates SWAP on the server
 # One of the things that I have lerned is that this kind of servers need swap.
@@ -54,7 +57,7 @@ apt-get -y autoremove
 
 # unattended-upgrades
 apt-get -y install update-notifier-common
-curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/VestaCP/master/files/50unattended-upgrades
+curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/50unattended-upgrades
 cat 50unattended-upgrades > /etc/apt/apt.conf.d/50unattended-upgrades
 rm 50unattended-upgrades
 echo 'APT::Periodic::Update-Package-Lists "1";
@@ -68,3 +71,14 @@ curl -O http://vestacp.com/pub/vst-install.sh
 bash vst-install.sh
 
 # bash vst-install.sh --nginx yes --apache yes --phpfpm no --vsftpd yes --proftpd no --exim yes --dovecot yes --spamassassin yes --clamav yes --named yes --iptables yes --fail2ban yes --mysql yes --postgresql no --remi no --quota yes --hostname host.domain.xx --email user@domain.xx --password xxx
+
+# add php-zip & php-gd (both used by most CMS's)
+apt-get -y install php7.0-zip
+apt-get -y install php7.0-gd
+
+# fix bash init
+curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/bash_profile
+cat bash_profile > ~/.bash_profile
+rm bash_profile
+
+echo 'Please reboot now, then reconnect and execute "bash post.sh" to run the post install script'
