@@ -43,9 +43,13 @@ A 5 dollars a month Digital Ocean Ubuntu 16.04 64 bit server, 1 GB ram / 1 CPU, 
 Get it at https://m.do.co/c/9e2b87317b00 (my affiliate link) or https://goo.gl/WWmpYW (original dev's affiliate link). 
 With this affiliate program link, they will instantly give you `10 u$ credit in virtual machines` (this is a 2 month free hosting) just for signing in with that link.
 
-After login to the droplet for the first time, copy the line bellow and execute it in the terminal
+After login to the droplet for the first time, copy the line bellow and execute it in the terminal:
 
-    apt-get -y install curl && curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/vestacp.sh && bash vestacp.sh
+    curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/vestacp.sh && bash vestacp.sh
+
+For hosts other than Digital Ocean, you could try the generic version of the script:
+
+    apt-get -y install curl && curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/vestacp-generic.sh && bash vestacp-generic.sh
 
 Once installed REBOOT the droplet. (Very important to do for the nex step !!!)
 
