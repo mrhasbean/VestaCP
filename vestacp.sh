@@ -51,9 +51,9 @@ dpkg-reconfigure locales
 
 # Update all your server software
 apt-get -y update
-apt-get -y upgrade
+# apt-get -y upgrade
 # apt-get -y dist-upgrade
-apt-get -y autoremove
+# apt-get -y autoremove
 
 # unattended-upgrades
 apt-get -y install update-notifier-common
@@ -67,7 +67,6 @@ APT::Periodic::Unattended-Upgrade "1";' > /etc/apt/apt.conf.d/20auto-upgrades
 /usr/sbin/delgroup admin
 
 # install vesta with admin's email
-apt-get -y install curl
 curl -O http://vestacp.com/pub/vst-install.sh
 bash vst-install.sh
 
