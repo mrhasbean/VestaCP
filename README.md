@@ -45,7 +45,7 @@ With this affiliate program link, they will instantly give you `10 u$ credit in 
 
 After login to the droplet for the first time, copy the line bellow and execute it in the terminal
 
-    curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/vestacp.sh && bash vestacp.sh
+    apt-get -y install curl && curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/vestacp.sh && bash vestacp.sh
 
 Once installed REBOOT the droplet. (Very important to do for the nex step !!!)
 
