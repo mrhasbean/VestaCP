@@ -52,7 +52,7 @@ dpkg-reconfigure locales
 # Update all your server software
 apt-get -y update
 apt-get -y upgrade
-apt-get -y dist-upgrade
+# apt-get -y dist-upgrade
 apt-get -y autoremove
 
 # unattended-upgrades
