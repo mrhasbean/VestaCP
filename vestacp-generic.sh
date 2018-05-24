@@ -50,6 +50,10 @@ dpkg-reconfigure locales
 # Update all your server software
 apt-get -y update
 
+# remove existing apache installation
+service apache2 stop
+apt-get -y purge apache2 apache2-utils apache2.2-bin apache2-common
+
 # unattended-upgrades
 apt-get -y install update-notifier-common
 curl -O https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/50unattended-upgrades
