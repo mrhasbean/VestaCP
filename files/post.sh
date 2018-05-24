@@ -68,7 +68,7 @@ chmod 770 /usr/local/vesta/bin/v-search-command
 	touch /usr/local/vesta/data/queue/letsencrypt.pipe
 	chmod 750 /usr/local/vesta/data/queue/letsencrypt.pipe
 
-hostname=`hostname`
+hostname=`hostname -f`
 v-add-letsencrypt-user admin
 v-add-letsencrypt-domain admin $hostname
 while [ ! -f "/home/admin/conf/web/ssl."$hostname".pem" ]; do sleep 1;echo; done
