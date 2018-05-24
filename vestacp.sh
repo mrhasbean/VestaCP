@@ -67,6 +67,7 @@ APT::Periodic::Unattended-Upgrade "1";' > /etc/apt/apt.conf.d/20auto-upgrades
 /usr/sbin/delgroup admin
 
 # install vesta with admin's email
+apt-get -y install curl
 curl -O http://vestacp.com/pub/vst-install.sh
 bash vst-install.sh
 
