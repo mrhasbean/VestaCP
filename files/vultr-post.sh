@@ -2,7 +2,6 @@
 
 cd /root/vestacp
 
-PATH=$PATH:/usr/local/vesta/bin
 hostname=`hostname -f`
 myip=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
 hostip=`dig @8.8.8.8 +short $hostname`
@@ -25,5 +24,7 @@ if [ "$myip" == "$hostip" ]; then
 	/etc/cron.daily/vesta_ssl
 	
 	touch /root/ssldone
+	rm -f /etc/cron.d/vultr_ssl
+	service cron restart
 	
 fi
