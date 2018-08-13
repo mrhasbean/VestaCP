@@ -1,1 +1,1 @@
-@reboot root  if [ ! -f /root/ssldone ]; then /root/vestacp/vultr-post; fi
+*/15 * * * *  root  if [ ! -f /root/ssldone ]; then /root/vestacp/vultr-post; fi
