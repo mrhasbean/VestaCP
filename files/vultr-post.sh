@@ -23,7 +23,13 @@ if [ "$myip" == "$hostip" ]; then
 	chmod +x /etc/cron.daily/vesta_ssl
 	/etc/cron.daily/vesta_ssl
 	
-	curl -H 'Cache-Control: no-cache' "https://clinicbeat.com/deployment-done/?host="$hostname"&ip="$hostip > /root/ssldone
+	curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/deploy_email > /root/vestacp/deploy_email.txt
+	sed -i 's/0DOMAIN0/'$hostname'/gi' /root/vestacp/deploy_email.txt
+	sed -i 's/0IPADDR0/'$hostip'/gi' /root/vestacp/deploy_email.txt
+	recipients="steve.h@wpinsites.com"
+	
+	/usr/sbin/sendmail "$recipients" < /root/vestacp/deploy_email.txt
+
 	rm -f /etc/cron.d/vultr_ssl
 	service cron restart
 	
