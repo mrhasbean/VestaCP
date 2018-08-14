@@ -14,8 +14,8 @@ if [ "$myip" == "$hostip" ]; then
 		touch /usr/local/vesta/data/queue/letsencrypt.pipe
 		chmod 750 /usr/local/vesta/data/queue/letsencrypt.pipe
 	
-	/usr/local/vesta/bin/v-add-letsencrypt-user admin
-	/usr/local/vesta/bin/v-add-letsencrypt-domain admin $hostname
+	v-add-letsencrypt-user admin
+	v-add-letsencrypt-domain admin $hostname
 	while [ ! -f "/home/admin/conf/web/ssl."$hostname".pem" ]; do sleep 1;echo; done
 	while [ ! -f "/home/admin/conf/web/ssl."$hostname".key" ]; do sleep 1;echo; done
 	curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/vesta_ssl > /etc/cron.daily/vesta_ssl
