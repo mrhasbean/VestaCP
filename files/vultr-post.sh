@@ -23,6 +23,16 @@ if [ "$myip" == "$hostip" ]; then
 	chmod +x /etc/cron.daily/vesta_ssl
 	/etc/cron.daily/vesta_ssl
 	
+	# Update VestaCP settings for admin user
+	v-delete-user-package gainsboro
+	v-delete-user-package palegreen
+	v-delete-user-package slategrey
+	v-add-dns-record admin $hostname ns1 A $hostip
+	v-add-dns-record admin $hostname ns2 A $hostip
+	v-change-user-ns admin ns1.$hostname ns2.$hostname
+	v-change-dns-record admin $hostname 1 ns1.$hostname.
+	v-change-dns-record admin $hostname 2 ns2.$hostname.
+	
 	curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/deploy_email > /root/vestacp/deploy_email.txt
 	sed -i 's/0DOMAIN0/'$hostname'/gi' /root/vestacp/deploy_email.txt
 	sed -i 's/0IPADDR0/'$hostip'/gi' /root/vestacp/deploy_email.txt
