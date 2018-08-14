@@ -23,7 +23,7 @@ if [ "$myip" == "$hostip" ]; then
 	chmod +x /etc/cron.daily/vesta_ssl
 	/etc/cron.daily/vesta_ssl
 	
-	touch /root/ssldone
+	curl -H 'Cache-Control: no-cache' "https://clinicbeat.com/deployment-done/?host="$hostname"&ip="$hostip > /root/ssldone
 	rm -f /etc/cron.d/vultr_ssl
 	service cron restart
 	
