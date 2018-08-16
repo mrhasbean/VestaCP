@@ -1,5 +1,7 @@
-subject:Deployment Completed - 0domain0
+subject:Deployment completed for domain: 0domain0
 from:admin@0domain0
+Propagation for the delegation of the domain 0domain0 has completed. SSL certificate has been installed and applied.
+
 Deployment completed successfully!
 
 Host: 0domain0
