@@ -33,6 +33,13 @@ if [ "$myip" == "$hostip" ]; then
 	v-change-dns-record admin $hostname 1 ns1.$hostname.
 	v-change-dns-record admin $hostname 2 ns2.$hostname.
 	
+	# Change default admin port to 2083
+	sed -i 's/8083;/2083;/' /usr/local/vesta/nginx/conf/nginx.conf
+	v-add-firewall-rule ACCEPT 0.0.0.0/0 2083 TCP
+	sed -i -e '/8083/ s/ACCEPT/DROP/' /usr/local/vesta/data/firewall/rules.conf
+	v-update-firewall
+	service vesta restart
+	
 	curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/deploy_email > /root/vestacp/deploy_email.txt
 	sed -i 's/0DOMAIN0/'$hostname'/gi' /root/vestacp/deploy_email.txt
 	sed -i 's/0IPADDR0/'$hostip'/gi' /root/vestacp/deploy_email.txt
