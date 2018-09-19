@@ -17,7 +17,7 @@ $rcmail_config = array();
 // PEAR database DSN for read/write operations
 // format is db_provider://user:password@host/database 
 
-$rcmail_config['db_dsnw'] = 'mysql://roundcube:@alphabetsoup@@localhost/roundcube';
+$rcmail_config['db_dsnw'] = 'mysql://roundcube:0alphabetsoup0@localhost/roundcube';
 // postgres example: 'pgsql://roundcube:pass@localhost/roundcubemail';
 
 // PEAR database DSN for read only operations (if empty write database will be used)
