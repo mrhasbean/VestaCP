@@ -48,16 +48,22 @@ if [ "$myip" == "$hostip" ]; then
 	# Create & populate the Roundcube Database if it doesn't exist
 	if [[ ! -d /var/lib/mysql/roundcube ]]; then
 
-		  DB="roundcube"
-		  IFS="'" read -ra IN <<< `grep dbpass /etc/roundcube/debian-db.php`
-		  DBPASS="${IN[1]}"
+		DB="roundcube"
+		IFS="'" read -ra IN <<< `grep dbpass /etc/roundcube/debian-db.php`
+		DBPASS="${IN[1]}"
 
-		  mysql -e "CREATE DATABASE ${DB} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
-		  mysql -e "CREATE USER ${DB}@localhost IDENTIFIED BY '${DBPASS}';"
-		  mysql -e "GRANT ALL PRIVILEGES ON ${DB}.* TO '${DB}'@'localhost';"
-		  mysql -e "FLUSH PRIVILEGES;"
+		mysql -e "CREATE DATABASE ${DB} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+		mysql -e "CREATE USER ${DB}@localhost IDENTIFIED BY '${DBPASS}';"
+		mysql -e "GRANT ALL PRIVILEGES ON ${DB}.* TO '${DB}'@'localhost';"
+		mysql -e "FLUSH PRIVILEGES;"
 
-		  mysql roundcube < /usr/share/dbconfig-common/data/roundcube/install/mysql
+		mysql roundcube < /usr/share/dbconfig-common/data/roundcube/install/mysql
+		  
+		curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/debian-db-roundcube.php > /root/vestacp/debian-db-roundcube.php
+		sed -i 's/0alphabetsoup0/'$DBPASS'/gi' /root/vestacp/debian-db-roundcube.php
+
+		mv /root/vestacp/debian-db-roundcube.php /etc/roundcube/
+		chgrp www-data /etc/roundcube/debian-db-roundcube.php 
 
 	fi
 	
