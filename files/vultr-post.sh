@@ -40,6 +40,27 @@ if [ "$myip" == "$hostip" ]; then
 	v-update-firewall
 	service vesta restart
 	
+	# Remove the 15-mailboxes.conf file if it exists in Dovecot config directory
+	if [ -f /etc/dovecot/conf.d/15-mailboxes.conf ]; then
+		  mv /etc/dovecot/conf.d/15-mailboxes.conf /root/
+	fi
+
+	# Create & populate the Roundcube Database if it doesn't exist
+	if [[ ! -d /var/lib/mysql/roundcube ]]; then
+
+		  DB="roundcube"
+		  IFS="'" read -ra IN <<< `grep dbpass /etc/roundcube/debian-db.php`
+		  DBPASS="${IN[1]}"
+
+		  mysql -e "CREATE DATABASE ${DB} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+		  mysql -e "CREATE USER ${DB}@localhost IDENTIFIED BY '${DBPASS}';"
+		  mysql -e "GRANT ALL PRIVILEGES ON ${DB}.* TO '${DB}'@'localhost';"
+		  mysql -e "FLUSH PRIVILEGES;"
+
+		  mysql roundcube < /usr/share/dbconfig-common/data/roundcube/install/mysql
+
+	fi
+	
 	curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/mrhasbean/VestaCP/master/files/deploy_email > /root/vestacp/deploy_email.txt
 	sed -i 's/0DOMAIN0/'$hostname'/gi' /root/vestacp/deploy_email.txt
 	sed -i 's/0IPADDR0/'$hostip'/gi' /root/vestacp/deploy_email.txt
